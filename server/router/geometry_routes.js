@@ -110,6 +110,8 @@ let getTrails = (req, res) => {
 
 
                 // console.log('the final result : ', TheFinalResult)
+
+                //===================== elevation =======================
                 // let ele = newData.geometry.map((geo, index) => {
 
                 //     return data.results[index].elevation
@@ -118,6 +120,8 @@ let getTrails = (req, res) => {
                 // });
                 // trail1.elevation = ele
                 // trail1.geometry.elevation = ele
+
+                //======================= elevation =========================
                 console.log('before save ')
 
                 trail1.save().then((dataSaved) => {
@@ -144,11 +148,12 @@ let getTrails = (req, res) => {
 
 let getCenterCoordinates = (req, res) => {
     const url = 'http://overpass-api.de/api/interpreter?data=[out:json];way["highway"="footway"](50.745,7.17,50.75,7.18);out center;';
+    const url2 = 'http://overpass-api.de/api/interpreter?data=[out:json];way["highway"="footway"](45.970,-74.25,46.040,-74.1);out center;';
 
     console.log('inside get trails')
 
 
-    axios.get(url).then((data) => {
+    axios.get(url2).then((data) => {
 
         let r = {
 
@@ -173,8 +178,8 @@ let getCenterCoordinates = (req, res) => {
                 console.log('before save ')
 
                 thetrail.save().then((dataSaved) => {
-
-                }).catch((err) => { res.status(401).send(err) });
+                    console.log(dataSaved)
+                }).catch((err) => { res.status(400).send(err) });
 
             });
 
